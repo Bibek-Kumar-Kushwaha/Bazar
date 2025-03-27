@@ -61,7 +61,7 @@ const menuItems: SidebarItem[] = [
 
 const Sidebar = () => {
     return (
-        <aside className='h-full  bg-slate-800 w-56 text-slate-50 p-4 flex flex-col space-y-6 shadow-md border-r-2'>
+        <aside className='h-full bg-background w-56 text-foreground p-4 flex flex-col space-y-6 shadow-md border-r-2'>
             {/* Logo */}
             <div className="text-2xl font-bold tracking-wide text-center py-3">LOGO</div>
 
@@ -77,7 +77,7 @@ const Sidebar = () => {
 
 /* Reusable Sidebar Link Component */
 const SidebarLink: React.FC<SidebarItem> = ({ href, icon, text }) => (
-    <Link href={href} className="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-slate-700 transition">
+    <Link href={href} className="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-background transition">
         {icon}
         <span className="font-medium tracking-wide">{text}</span>
     </Link>

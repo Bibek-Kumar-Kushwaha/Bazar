@@ -31,25 +31,25 @@ const chartConfig = {
   },
   chrome: {
     label: "Chrome",
-    color: "blue",
+    color: "var(--chart-1)", // Orange
   },
   safari: {
     label: "Safari",
-    color: "red",
+    color: "var(--chart-2)", // Teal Green
   },
   firefox: {
     label: "Firefox",
-    color: "yellow",
+    color: "var(--chart-3)", // Dark Blue
   },
   edge: {
     label: "Edge",
-    color: "green",
+    color: "var(--chart-4)", // Yellow
   },
   other: {
     label: "Other",
-    color: "purple",
+    color: "var(--chart-5)", // Pinkish-Red
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 const RightChart = () => {
   return (
