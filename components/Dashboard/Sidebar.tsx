@@ -61,7 +61,7 @@ const menuItems: SidebarItem[] = [
 
 const Sidebar = () => {
     return (
-        <aside className='h-screen bg-slate-800 w-56 text-slate-50 p-4 flex flex-col space-y-6 shadow-md border-r-2'>
+        <aside className='h-full  bg-slate-800 w-56 text-slate-50 p-4 flex flex-col space-y-6 shadow-md border-r-2'>
             {/* Logo */}
             <div className="text-2xl font-bold tracking-wide text-center py-3">LOGO</div>
 
