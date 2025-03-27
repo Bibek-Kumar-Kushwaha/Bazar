@@ -16,7 +16,11 @@ interface PaginationProps {
     currentPage: number;
 }
 
-const PaginationDemo: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, currentPage }) => {
+const PaginationDemo: React.FC<PaginationProps> = ({ 
+    totalItems, 
+    itemsPerPage, 
+    currentPage 
+}) => {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -24,9 +28,10 @@ const PaginationDemo: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, c
     const totalPages = Math.ceil(totalItems / itemsPerPage);
 
     const handlePageChange = (page: number) => {
-        const params = new URLSearchParams(searchParams);
+        const params = new URLSearchParams(searchParams.toString());
         params.set('page', page.toString());
-        router.replace(`${pathname}?${params.toString()}`);
+        // Use router.push with scroll: false option
+        router.push(`${pathname}?${params.toString()}`, { scroll: false });
     };
 
     const renderPageNumbers = () => {
@@ -39,24 +44,23 @@ const PaginationDemo: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, c
             startPage = Math.max(1, endPage - maxVisiblePages + 1);
         }
 
-        for (let i = startPage; i <= endPage; i++) {
-            pages.push(
-                <PaginationItem key={i}>
+        return Array.from({ length: endPage - startPage + 1 }, (_, i) => {
+            const pageNumber = startPage + i;
+            return (
+                <PaginationItem key={pageNumber}>
                     <PaginationLink 
-                        href="#" 
-                        isActive={i === currentPage}
                         onClick={(e) => {
                             e.preventDefault();
-                            handlePageChange(i);
+                            handlePageChange(pageNumber);
                         }}
+                        isActive={pageNumber === currentPage}
+                        className="cursor-pointer"
                     >
-                        {i}
+                        {pageNumber}
                     </PaginationLink>
                 </PaginationItem>
             );
-        }
-
-        return pages;
+        });
     };
 
     return (
@@ -64,13 +68,15 @@ const PaginationDemo: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, c
             <PaginationContent>
                 <PaginationItem>
                     <PaginationPrevious 
-                        href="#" 
                         onClick={(e) => {
                             e.preventDefault();
                             if (currentPage > 1) handlePageChange(currentPage - 1);
                         }}
                         aria-disabled={currentPage === 1}
-                        className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                        className={currentPage === 1 ? 
+                            "pointer-events-none opacity-50" : 
+                            "cursor-pointer"
+                        }
                     />
                 </PaginationItem>
                 
@@ -84,13 +90,15 @@ const PaginationDemo: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, c
                 
                 <PaginationItem>
                     <PaginationNext 
-                        href="#" 
                         onClick={(e) => {
                             e.preventDefault();
                             if (currentPage < totalPages) handlePageChange(currentPage + 1);
                         }}
                         aria-disabled={currentPage === totalPages}
-                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                        className={currentPage === totalPages ? 
+                            "pointer-events-none opacity-50" : 
+                            "cursor-pointer"
+                        }
                     />
                 </PaginationItem>
             </PaginationContent>
